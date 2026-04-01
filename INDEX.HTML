@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Premium | Nama Anda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables & Base Setup */
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-gray: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Global Section Styles */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 120px;
+        }
+
+        .hero-content { flex: 1; }
+        .hero-content h3 { font-size: 24px; color: var(--text-gray); font-weight: 500; }
+        .hero-content h1 { font-size: 56px; line-height: 1.2; margin: 10px 0; }
+        .hero-content h1 span { color: var(--primary); }
+        .hero-content p { color: var(--text-gray); margin-bottom: 30px; font-size: 16px; max-width: 500px; }
+
+        .typing-text { font-size: 24px; font-weight: 600; color: #38bdf8; margin-bottom: 15px; min-height: 36px;}
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-outline { background: transparent; color: #fff; border: 2px solid #fff; margin-left: 15px; }
+        .btn-outline:hover { background: #fff; color: var(--dark); box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+
+        .social-icons { margin-top: 30px; }
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            margin-right: 15px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-icons a:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-5px); }
+
+        .hero-img { flex: 1; text-align: right; }
+        .hero-img img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: floatImage 4s ease-in-out infinite;
+            border: 1px solid var(--glass-border);
+        }
+
+        @keyframes floatImage {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* About / Skills Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-info h3 { font-size: 24px; margin-bottom: 15px; color: #fff; }
+        .about-info p { color: var(--text-gray); margin-bottom: 20px; }
+        .info-list { list-style: none; }
+        .info-list li { margin-bottom: 10px; color: var(--light); }
+        .info-list li i { color: var(--primary); width: 25px; }
+
+        .skills-box .skill { margin-bottom: 20px; }
+        .skill-name { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
+        .skill-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; }
+        .skill-per { height: 100%; background: var(--primary); border-radius: 5px; position: relative; }
+
+        /* Portfolio Section */
+        .filter-buttons { text-align: center; margin-bottom: 40px; }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 8px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .portfolio-item img { width: 100%; height: 250px; object-fit: cover; transition: 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.1); filter: brightness(0.5); }
+
+        .portfolio-info {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.9));
+            transition: 0.5s;
+            text-align: center;
+        }
+
+        .portfolio-item:hover .portfolio-info { bottom: 0; }
+        .portfolio-info h4 { font-size: 20px; color: #fff; margin-bottom: 5px; }
+        .portfolio-info p { color: var(--primary); font-size: 14px; margin-bottom: 15px; }
+        .portfolio-info a { color: #fff; font-size: 20px; background: rgba(255,255,255,0.2); width: 40px; height: 40px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%; text-decoration: none; backdrop-filter: blur(5px); }
+        .portfolio-info a:hover { background: var(--primary); }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .contact-info .contact-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-box .icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            margin-right: 20px;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+
+        .contact-box h4 { color: #fff; font-size: 18px; margin-bottom: 5px; }
+        .contact-box p { color: var(--text-gray); font-size: 14px; }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.1); }
+        .contact-form textarea { height: 150px; resize: none; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero, .about-grid, .contact-container { grid-template-columns: 1fr; text-align: center; }
+            .hero { flex-direction: column-reverse; justify-content: center; padding-top: 150px; }
+            .hero-img { margin-bottom: 50px; text-align: center; }
+            .hero-content h1 { font-size: 40px; }
+            nav ul { display: none; } /* Simplified for code: In real project, use a hamburger menu */
+            .contact-info .contact-box { flex-direction: column; text-align: center; }
+            .contact-box .icon { margin: 0 auto 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">Porto<span>folio.</span></a>
+            <ul>
+                <li><a href="#beranda" class="active">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#portofolio">Portofolio</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="beranda" class="hero reveal">
+        <div class="hero-content">
+            <h3>Halo, Nama saya</h3>
+            <h1>John <span>Doe</span></h1>
+            <div class="typing-text">Saya seorang <span id="typewriter"></span></div>
+            <p>Saya adalah profesional yang berdedikasi tinggi dalam menciptakan solusi inovatif dan efisien. Mari wujudkan ide cemerlang menjadi kenyataan.</p>
+            <div class="hero-btns">
+                <a href="#kontak" class="btn">Rekrut Saya</a>
+                <a href="#portofolio" class="btn btn-outline">Lihat Proyek</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="https://via.placeholder.com/400x400/1e1b4b/4f46e5?text=Foto+Anda" alt="Profil">
+        </div>
+    </section>
+
+    <section id="tentang" class="reveal">
+        <h2 class="section-title">Tentang <span>Saya</span></h2>
+        <div class="about-grid">
+            <div class="about-info">
+                <h3>Informasi Pribadi</h3>
+                <p>Dengan pengalaman lebih dari 3 tahun, saya terbiasa menyelesaikan masalah kompleks dengan pendekatan yang terstruktur dan kreatif.</p>
+                <ul class="info-list">
+                    <li><i class="fas fa-user"></i> <strong>Nama Lengkap:</strong> John Doe</li>
+                    <li><i class="fas fa-envelope"></i> <strong>Email:</strong> john@email.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> <strong>Lokasi:</strong> Jakarta, Indonesia</li>
+                    <li><i class="fas fa-briefcase"></i> <strong>Status:</strong> Tersedia untuk Bekerja</li>
+                </ul>
+            </div>
+            <div class="skills-box">
+                <h3>Keahlian Utama</h3>
+                <div class="skill">
+                    <div class="skill-name"><span>Manajemen Proyek</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-per" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name"><span>Analisis Data</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-per" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name"><span>Pemrograman Web</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-per" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name"><span>Desain UI/UX</span><span>75%</span></div>
+                    <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portofolio" class="reveal">
+        <h2 class="section-title">Proyek & <span>Portofolio</span></h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="web">Web App</button>
+            <button class="filter-btn" data-filter="data">Analisis Data</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item data">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Proyek 1">
+                <div class="portfolio-info">
+                    <h4>Sistem Laporan Kendaraan</h4>
+                    <p>Python & Excel Automation</p>
+                    <a href="#"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="portfolio-item web">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Proyek 2">
+                <div class="portfolio-info">
+                    <h4>Dashboard Perusahaan</h4>
+                    <p>UI/UX Design & Frontend</p>
+                    <a href="#"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="portfolio-item web">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Proyek 3">
+                <div class="portfolio-info">
+                    <h4>Aplikasi E-Commerce</h4>
+                    <p>Web Development</p>
+                    <a href="#"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="reveal">
+        <h2 class="section-title">Mari <span>Terhubung</span></h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-box">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>john.doe@contohemail.com</p>
+                    </div>
+                </div>
+                <div class="contact-box">
+                    <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                    <div>
+                        <h4>Telepon / WhatsApp</h4>
+                        <p>+62 812 3456 7890</p>
+                    </div>
+                </div>
+                <div class="contact-box">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <h4>Lokasi</h4>
+                        <p>Jakarta Selatan, Indonesia</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! (Ini hanya simulasi UI)');">
+                <input type="text" placeholder="Nama Lengkap" required>
+                <input type="email" placeholder="Alamat Email" required>
+                <input type="text" placeholder="Subjek">
+                <textarea placeholder="Tulis pesan Anda di sini..." required></textarea>
+                <button type="submit" class="btn" style="width: 100%; border:none; cursor:pointer;">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portofolio Saya. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        // 1. Efek Mengetik Otomatis (Typewriter)
+        const texts = ["Data Analyst", "Web Developer", "Problem Solver"];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+
+        (function type() {
+            if (count === texts.length) { count = 0; }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+            
+            document.getElementById('typewriter').textContent = letter;
+            
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000); // Jeda sebelum kata berikutnya
+            } else {
+                setTimeout(type, 100); // Kecepatan mengetik
+            }
+        }());
+
+        // 2. Efek Scroll Reveal (Elemen muncul saat di-scroll)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Jalankan sekali saat load
+
+        // 3. Filter Portofolio
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Hapus class active dari semua tombol
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Tambahkan class active ke tombol yang diklik
+                btn.classList.add('active');
+                
+                const filterValue = btn.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.style.opacity = '1', 100);
+                    } else {
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
